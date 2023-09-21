@@ -1,6 +1,12 @@
 const correoIntroducido = document.getElementById("correo");
 const pwdIntroducida = document.getElementById("pwd");
-var persona = {};
+var persona = {
+    nombre : "",
+    pApellido: "",
+    sApellido: "",
+    dni_p : "",
+    fecha_p : ""
+};
 
 
 function validarDatos() {
@@ -43,53 +49,54 @@ function validarEmail(mail) {
 }
 
 
-const nombre = document.getElementById("nombre");
-const pape = document.getElementById("paepllido");
-const sape = docuemnt.getElementById("sapellido");
-const dni = document.getElementById("dni");
-const fecha = document.getElementById("fecha");
+const nombreI = document.getElementById("nombre");
+const papeI = document.getElementById("papellido");
+const sapeI = docuemnt.getElementById("sapellido");
+const dniI = document.getElementById("dni");
+const fechaI = document.getElementById("fecha");
 
 
 function limpiarDatos() {
-    nombre.value = "";
-    pape.value = "";
-    sape.value = "";
-    dni.value = "";
-    fecha.value = "";
+    nombreI.value = "";
+    papeI.value = "";
+    sapeI.value = "";
+    dniI.value = "";
+    fechaI.value = "";
 }
 
 function validarDatos2() {
     let error = "";
     var hayErrores = false;
-    if (nombre.value.length < 3 || nombre.value.length > 30) {
+    if (nombreI.value.length < 3 || nombreI.value.length > 30) {
         error += "El nombre debe contener solo entre 3 y 30 caracteres \n";
         hayErrores = true;
     }
-    if (pape.value.length < 2 || pape.value.length > 30) {
+    if (papeI.value.length < 2 || papeI.value.length > 30) {
         error += "El primer apellido debe contener solo entre 2 y 30 caracteres \n";
         hayErrores = true;
     }
-    if (sape.value.length < 2 || sape.value.length > 30) {
+    if (sapeI.value.length < 2 || sapeI.value.length > 30) {
         error += "El primer apellido debe contener solo entre 2 y 30 caracteres \n";
         hayErrores = true;
     }
-    if (!fecha.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+    if (!fechaI.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
         error += "El formato de la fecha de nacimiento debe ser dd/mm/AAAA.\n";
         hayErrores = true;
     }
-    if (!validarDNI(dni) || dni.length !== 8) {
+    if (!validarDNI(dni) || dniI.length !== 8) {
         error += "El DNI no es válido.\n";
         hayErrores = true;
     }
-    if (hayErrores) {
+    
+    if (!hayErrores) {
         alert(error);
     }else {
         alert("Datos guardados");
-        persona.nombre = nombre.value;
-        persona.pape = pape.value;
-        persona.sape = sape.value;
-        persona.dni = dni.value;
-        persona.fecha = fecha.value;
+        persona.nombre = nombreI.value;
+        persona.pape = papeI.value;
+        persona.sape = sapeI.value;
+        persona.dni = dniI.value;
+        persona.fecha = fechaI.value;
     }
 
 }
