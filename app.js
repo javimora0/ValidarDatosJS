@@ -51,7 +51,7 @@ function validarEmail(mail) {
 
 const nombreI = document.getElementById("nombre");
 const papeI = document.getElementById("papellido");
-const sapeI = docuemnt.getElementById("sapellido");
+const sapeI = document.getElementById("sapellido");
 const dniI = document.getElementById("dni");
 const fechaI = document.getElementById("fecha");
 
@@ -64,12 +64,12 @@ function limpiarDatos() {
     fechaI.value = "";
 }
 
-function validarDatos2() {
-    let error = "";
+function validarDtos2() {
+    var error = "";
     var hayErrores = false;
     if (nombreI.value.length < 3 || nombreI.value.length > 30) {
         error += "El nombre debe contener solo entre 3 y 30 caracteres \n";
-        hayErrores = true;
+        hayErrores = true;    
     }
     if (papeI.value.length < 2 || papeI.value.length > 30) {
         error += "El primer apellido debe contener solo entre 2 y 30 caracteres \n";
@@ -83,20 +83,22 @@ function validarDatos2() {
         error += "El formato de la fecha de nacimiento debe ser dd/mm/AAAA.\n";
         hayErrores = true;
     }
-    if (!validarDNI(dni) || dniI.length !== 8) {
+    if (!validarDNI(dniI) || dniI.length !== 8) {
         error += "El DNI no es válido.\n";
         hayErrores = true;
+        alert("hola");
+
     }
     
-    if (!hayErrores) {
+    if (hayErrores) {
         alert(error);
     }else {
         alert("Datos guardados");
         persona.nombre = nombreI.value;
         persona.pape = papeI.value;
         persona.sape = sapeI.value;
-        persona.dni = dniI.value;
-        persona.fecha = fechaI.value;
+        persona.dni_p = dniI.value;
+        persona.fecha_p = fechaI.value;
     }
 
 }
