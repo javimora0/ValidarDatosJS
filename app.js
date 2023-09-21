@@ -79,15 +79,14 @@ function validarDtos2() {
         error += "El primer apellido debe contener solo entre 2 y 30 caracteres \n";
         hayErrores = true;
     }
-    if (!fechaI.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+    if (!validarFecha(fechaI.value)) {
         error += "El formato de la fecha de nacimiento debe ser dd/mm/AAAA.\n";
         hayErrores = true;
     }
-    if (!validarDNI(dniI) || dniI.length !== 8) {
+
+    if (validarDNI(dniI.value)) {
         error += "El DNI no es válido.\n";
         hayErrores = true;
-        alert("hola");
-
     }
     
     if (hayErrores) {
@@ -103,14 +102,40 @@ function validarDtos2() {
 
 }
 
-function validarDNI(dni) {
-    const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
-    if (/^\d{8}$/.test(dni)) {
-        const letraValida = letras.charAt(parseInt(dni, 10) % 23);
-        const letraUsuario = dni.charAt(8).toUpperCase();
-        return letraValida === letraUsuario;
+function validarFecha(fechaIntroducida) {
+    var aux = false;
+    var primerSlash = fechaIntroducida[5];
+    var segundoSlash = fechaIntroducida[2];
+    if (primerSlash == "/" && segundoSlash == "/") {
+        aux = true;
     }
-    return false;
+    return aux;
+}
+
+//funcion sacada de stackoverflow
+function validarDNI(dni) {
+    var numero, let, letra;
+    var expresion_regular_dni = /^[XYZ]?\d{5,8}[A-Z]$/;
+
+    dni = dni.toUpperCase();
+
+    if(expresion_regular_dni.test(dni) === true){
+        numero = dni.substr(0,dni.length-1);
+        numero = numero.replace('X', 0);
+        numero = numero.replace('Y', 1);
+        numero = numero.replace('Z', 2);
+        let = dni.substr(dni.length-1, 1);
+        numero = numero % 23;
+        letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
+        letra = letra.substring(numero, numero+1);
+        if (letra != let) {
+            return false;
+        }else{
+            return true;
+        }
+    }else{
+        return false;
+    }
 }
 
 
